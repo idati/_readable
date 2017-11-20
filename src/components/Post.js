@@ -20,6 +20,7 @@ import PostList from './PostList'
 import Comment from './Comment'
 import * as api from '../api/index'
 import getPostsById from '../api/index'
+import P404 from './P404';
 
 var identifier = require('identifier');
 
@@ -145,7 +146,7 @@ class Post extends Component {
       // acategory = this.state.link.filter(function(post){return post.id===this.state.id})
       acategory = this.state.act
       let tmp
-      console.log('Look', this, acategory, id, posts, this.props, actual,  posts.filter(function(post){return post.id===id}));
+      console.log('Look', this, acategory, id, posts, this.props, actual,  posts.filter(function(post){return post.id===id}).length);
  
       // if(!id){if(this.props.match){id=this.props.match.params.id; check = true}else{id=this.props.posts.id; posts=Object.keys(posts); check = true}}
       // if(this.props.categoryName){console.log('NEWID',this); this.props.getAllPostfilterbycategory(this.props.categoryName)}
@@ -174,9 +175,11 @@ class Post extends Component {
       //   // getAllPostsortbyvote();
       //   // state.sort();
       // }
+      // console.log(this.props.match.params.id)
+    
+      if((posts.filter(function(p){return p.id===id}).length===0)){return(<P404/>)}
       if(this.state.edit.id!==id){
       if(check===false)
-
       {return(
         <div>
 
