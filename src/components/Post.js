@@ -21,6 +21,8 @@ import Comment from './Comment'
 import * as api from '../api/index'
 import getPostsById from '../api/index'
 import P404 from './P404';
+import App from '../App';
+import CategoryList from './CategoryList';
 
 var identifier = require('identifier');
 
@@ -133,6 +135,8 @@ class Post extends Component {
 
       if(!id){if(this.props.match){id=this.props.match.params.id; check = true}else{id=this.props.posts.id; posts=Object.keys(posts); check = true}}
       if(!this.props.posts[0]){getAllPosts(); console.log("ERROR", this.props.posts[0])}
+      if(typeof posts === 'string'){return(<div>{this.props.history.goBack()}</div>)}
+      console.log('bevore crash', typeof posts)
       if(typeof(posts)==='object'){actual = Object.keys(this.props.posts).filter(function(post){return post.id===id})}else{actual = this.props.posts.filter(function(post){return post.id===id})}
 
       // let a = this.props.getPostbyId(id)
